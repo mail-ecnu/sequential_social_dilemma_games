@@ -36,6 +36,9 @@ pip3 install -r requirements.txt
 # And https://github.com/ray-project/ray/pull/8491
 . ray_uint8_patch.sh 
 cd run_scripts
+if you want to use highway_env(Not be implemented yet):
+. ray_return_float_patch.sh
+let the ray support observation in float32 space
 ```
 
 After the setup, you can run experiments like so:
