@@ -27,7 +27,8 @@ conda create -n ssd python=3.7
 conda activate ssd
 conda install cudatoolkit=10.1
 conda install cudnn=7.6.5
-. venv/bin/activate
+or you can easily use the environment.yaml
+conda env create -f environment.yaml 
 pip3 install --upgrade pip setuptools wheel
 python3 setup.py develop
 pip3 install -r requirements.txt
