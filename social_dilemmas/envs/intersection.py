@@ -268,6 +268,18 @@ class WarpperMultiAgentIntersectionEnv(MultiAgentEnv):
         self._step_count = None
         self.agents = {}
 
+    @property
+    def observation_space(self):
+        obs_space = {
+            "curr_obs": self._highway_env.observation_space[0]
+        }
+        obs_space = gym.spaces.Dict(obs_space)
+        return obs_space
+
+    @property
+    def action_space(self):
+        return self._highway_env.action_space[0]
+
     def render(self, mode="human"):
         return self._highway_env.render()
 
