@@ -23,22 +23,18 @@ The above plot shows the empirical Schelling diagrams for both Cleanup (A) and H
 ```
 git clone -b master https://github.com/eugenevinitsky/sequential_social_dilemma_games
 cd sequential_social_dilemma_games
-conda create -n ssd python=3.7
-conda activate ssd
-conda install cudatoolkit=10.1
-conda install cudnn=7.6.5
-or you can easily use the environment.yaml
 conda env create -f environment.yaml 
-pip3 install --upgrade pip setuptools wheel
+conda activate ssd
 python3 setup.py develop
 pip3 install -r requirements.txt
 # Patch ray due to https://github.com/ray-project/ray/issues/7946
 # And https://github.com/ray-project/ray/pull/8491
+chmod a+x *.sh
 . ray_uint8_patch.sh 
 cd run_scripts
-if you want to use highway_env(Not be implemented yet):
+# if you want to use highway_env(Not be implemented yet):
+#let the ray support observation in float32 space
 . ray_return_float_patch.sh
-let the ray support observation in float32 space
 ```
 
 After the setup, you can run experiments like so:
