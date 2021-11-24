@@ -224,6 +224,7 @@ def initialize_ray(args):
         args.local_mode = True
     if args.multi_node and args.local_mode:
         sys.exit("You cannot have both local mode and multi node on at the same time")
+    num_gpus = int(args.gpus_for_driver + args.gpus_per_worker * args.num_workers + 0.5)
     ray.init(
         address=args.address,
         local_mode=args.local_mode,
@@ -231,6 +232,7 @@ def initialize_ray(args):
         object_store_memory=args.object_store_memory,
         redis_max_memory=args.redis_max_memory,
         include_webui=False,
+        num_gpus=num_gpus
     )
 
 

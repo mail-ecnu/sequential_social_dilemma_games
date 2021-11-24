@@ -23,7 +23,10 @@ The above plot shows the empirical Schelling diagrams for both Cleanup (A) and H
 ```
 git clone -b master https://github.com/eugenevinitsky/sequential_social_dilemma_games
 cd sequential_social_dilemma_games
-python3 -m venv venv # Create a Python virtual environment
+conda create -n ssd python=3.7
+conda activate ssd
+conda install cudatoolkit=10.1
+conda install cudnn=7.6.5
 . venv/bin/activate
 pip3 install --upgrade pip setuptools wheel
 python3 setup.py develop
