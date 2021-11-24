@@ -274,7 +274,6 @@ class WarpperMultiAgentIntersectionEnv(MultiAgentEnv):
     def reset(self):
         self.agents = {}
         obs = self._highway_env.reset()
-        self._highway_env.action_space
         observations = {}
         for agent in self.agents.values():
             observations[agent.agent_id] = {"curr_obs": obs[self.agents[agent[agent.agent_id]]]}
