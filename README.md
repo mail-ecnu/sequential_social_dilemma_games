@@ -26,14 +26,13 @@ cd sequential_social_dilemma_games
 conda env create -f environment.yaml 
 conda activate ssd
 python3 setup.py develop
-# Patch ray due to https://github.com/ray-project/ray/issues/7946
-# And https://github.com/ray-project/ray/pull/8491
 chmod a+x *.sh
 ./ray_uint8_patch.sh 
+# Patch ray due to https://github.com/ray-project/ray/issues/7946
+# And https://github.com/ray-project/ray/pull/8491
 cd run_scripts
 # if you want to use highway_env(Not be implemented yet):
-#let the ray support observation in float32 space
-chmod a+x *.sh
+# let the ray support observation in float32 space
 ./ray_return_float_patch.sh
 ```
 
