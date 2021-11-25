@@ -261,19 +261,43 @@ class MultiAgentIntersectionEnv(AbstractEnv):
 
 
 class WarpperMultiAgentIntersectionEnv(MultiAgentEnv):
-    def __init__(self, max_steps=100, num_agents=1):
+    def __init__(self, max_steps=100, num_agents=1, return_agent_actions=False):
         self.num_agents = num_agents
         self._highway_env = MultiAgentIntersectionEnv()
         self._max_steps = max_steps
         self._step_count = None
         self.agents = {}
+        self.return_agent_actions = return_agent_actions
 
     @property
     def observation_space(self):
         obs_space = {
             "curr_obs": self._highway_env.observation_space[0]
         }
+        if self.return_agent_actions:
+            obs_space = {
+                **obs_space,
+                "other_agent_actions": Box(
+                    low=0,
+                    high=self._highway_env.action_space[0].n,
+                    shape=(self.num_agents - 1,),
+                    dtype=np.float32
+                ),
+                "visible_agents": Box(
+                    low=0,
+                    high=1,
+                    shape=(self.num_agents - 1,),
+                    dtype=np.float32,
+                ),
+                "prev_visible_agents": Box(
+                    low=0,
+                    high=self._highway_env.action_space[0].n,
+                    shape=(self.num_agents - 1,),
+                    dtype=np.float32,
+                ),
+            }
         obs_space = gym.spaces.Dict(obs_space)
+        obs_space.dtype = np.float32
         return obs_space
 
     @property
@@ -298,9 +322,6 @@ class WarpperMultiAgentIntersectionEnv(MultiAgentEnv):
         for i in range(self.num_agents):
             agent_id = "agent-" + str(i)
             self.agents[agent_id] = i
-
-
-
 
 
 env = WarpperMultiAgentIntersectionEnv()
